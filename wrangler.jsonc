@@ -1,0 +1,27 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "niwas-pos",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-11-01",
+  "observability": { "enabled": true },
+
+  // POS front-end (plain HTML/CSS/JS, no build step). Requests that match a file in
+  // ./public are served directly; everything else (i.e. /api/*) reaches the Worker.
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS"
+  },
+
+  // All business data lives in D1 (SQLite). Schema: ./migrations
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "niwas-pos-db",
+      "database_id": "2137b383-a4f4-408e-9218-ae821d4fa196",
+      "migrations_dir": "migrations"
+    }
+  ]
+
+  // Optional: protect the first-run setup screen on a public deployment with
+  //   npx wrangler secret put SETUP_KEY
+}

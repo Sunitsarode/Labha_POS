@@ -1,0 +1,22 @@
+{
+  "name": "niwas-pos",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GST-ready point of sale for Indian retail, running on Cloudflare Workers + D1",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:migrate:local": "wrangler d1 migrations apply niwas-pos-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply niwas-pos-db --remote",
+    "types": "wrangler types",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test test/gst.test.js",
+    "smoke": "node test/api.smoke.mjs"
+  },
+  "devDependencies": {
+    "qrcode-generator": "^2.0.4",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.160.0"
+  }
+}

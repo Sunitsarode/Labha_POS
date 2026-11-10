@@ -1,0 +1,71 @@
+/* Print documents: always black on white (paper), in light and dark OS themes alike. */
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+body { margin: 0; background: #e8e8e5; color: #000; font: 12px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+.toolbar { position: sticky; top: 0; z-index: 2; display: flex; gap: 12px; align-items: center; padding: 10px 16px; background: #1a1a19; color: #f0efec; font-size: 13px; }
+.toolbar button { padding: 7px 18px; border: 0; border-radius: 7px; background: #2a78d6; color: #fff; font: inherit; font-weight: 600; cursor: pointer; }
+#doc { padding: 24px 12px 48px; }
+.loading, .error { text-align: center; color: #333; font-size: 14px; }
+.error { color: #c42b2b; }
+table { width: 100%; border-collapse: collapse; }
+td, th { padding: 2px 0; vertical-align: top; }
+th { text-align: left; font-weight: 700; }
+.r { text-align: right; }
+.c { text-align: center; }
+.small { font-size: 0.85em; }
+.pre { white-space: pre-line; }
+.shop { font-size: 1.35em; font-weight: 800; }
+.doc-title { font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.words { font-style: italic; }
+.stamp { display: inline-block; margin: 4px 0; padding: 2px 10px; border: 2px solid #c42b2b; color: #c42b2b; font-weight: 800; letter-spacing: .1em; }
+.upi { display: flex; align-items: center; gap: 10px; margin: 8px 0; }
+.upi svg { flex: none; }
+
+/* 80 mm thermal receipt */
+.receipt { width: 76mm; margin: 0 auto; padding: 4mm 3mm; background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,.18); font-size: 11.5px; }
+.receipt .doc-title { text-align: center; margin: 6px 0 4px; padding: 3px 0; border-top: 1px dashed #000; border-bottom: 1px dashed #000; }
+.receipt .kv td:first-child { width: 34%; color: #333; }
+.receipt .lines { margin-top: 6px; border-top: 1px dashed #000; }
+.receipt .lines thead th { border-bottom: 1px dashed #000; padding: 3px 0; }
+.receipt .lines .nm td { padding-top: 4px; font-weight: 650; }
+.receipt .lines .dt td { color: #222; font-size: 0.92em; }
+.receipt .tot { margin-top: 4px; border-top: 1px dashed #000; }
+.receipt .tot .grand td { padding: 4px 0; font-size: 1.35em; font-weight: 800; border-top: 1px dashed #000; border-bottom: 1px dashed #000; }
+.receipt .pay { border-top: 0; }
+.receipt .due { margin: 4px 0; font-weight: 800; text-align: center; }
+.receipt .gst { margin-top: 6px; font-size: 0.9em; }
+.receipt .gst th { border-bottom: 1px dashed #000; }
+.receipt .words { margin: 6px 0; font-size: 0.92em; }
+.receipt .foot { margin-top: 8px; padding-top: 6px; border-top: 1px dashed #000; }
+
+/* A4 tax invoice */
+.a4 { width: 210mm; min-height: 297mm; margin: 0 auto; padding: 12mm; background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,.18); font-size: 11px; }
+.a4-head { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 8px; border-bottom: 2px solid #000; }
+.a4 .doc-title { font-size: 1.6em; }
+.a4 .meta { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid #000; border-top: 0; }
+.a4 .meta .box { padding: 6px 8px; }
+.a4 .meta .box + .box { border-left: 1px solid #000; }
+.a4 .lbl { margin-top: 6px; font-size: 0.85em; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: #333; }
+.a4 .meta .box .lbl { margin-top: 0; }
+.a4 .kv td:first-child { width: 42%; color: #333; }
+.a4 .items { margin-top: 8px; border: 1px solid #000; }
+.a4 .items th { padding: 4px 5px; border-bottom: 1px solid #000; background: #f0f0f0; font-size: 0.92em; }
+.a4 .items td { padding: 4px 5px; border-bottom: 1px solid #ccc; }
+.a4 .items td .small { color: #444; }
+.a4 .bottom { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; margin-top: 8px; }
+.a4 .hsn { margin-top: 8px; border: 1px solid #000; font-size: 0.92em; }
+.a4 .hsn th, .a4 .hsn td { padding: 3px 5px; border-bottom: 1px solid #ccc; }
+.a4 .hsn th { background: #f0f0f0; }
+.a4 .tot td { padding: 3px 0; }
+.a4 .tot .grand td { padding: 5px 0; border-top: 1px solid #000; border-bottom: 1px solid #000; font-size: 1.25em; font-weight: 800; }
+.a4 .sign { margin-top: 18px; text-align: right; }
+.a4 .sign .space { height: 42px; }
+.a4 footer { margin-top: 18px; color: #444; }
+
+@media print {
+  body { background: #fff; }
+  .no-print { display: none !important; }
+  #doc { padding: 0; }
+  .receipt, .a4 { width: auto; min-height: 0; margin: 0; padding: 0; box-shadow: none; }
+  .a4 .items tr { break-inside: avoid; }
+}
